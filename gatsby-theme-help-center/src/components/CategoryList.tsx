@@ -1,23 +1,36 @@
-import React from "react";
-import styled from "../styled";
-import { Link } from "gatsby";
-import { Card, CardContent, Typography } from "@material-ui/core";
-import { Category } from "../types/Category";
+import React from 'react';
+import styled from '../styled';
+import { Link } from 'gatsby';
+import { Card, CardContent, Typography } from '@material-ui/core';
+import { Category } from '../types/Category';
 
-const Grid = styled("div")`
+const columnCount = (numberOfItems) => {
+  if (numberOfItems === 1) {
+    return 1;
+  }
+  if (numberOfItems % 2 === 0) {
+    return 2;
+  }
+  return 3;
+};
+
+const Grid = styled('div')`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: ${p => p.theme.spacing(3)}px;
-  grid-row-gap: ${p => p.theme.spacing(4)}px;
+  grid-template-columns: repeat(
+    ${(props) => columnCount(props.children.length)},
+    1fr
+  );
+  grid-column-gap: ${(p) => p.theme.spacing(3)}px;
+  grid-row-gap: ${(p) => p.theme.spacing(4)}px;
 
   @media (max-width: 800px) {
     grid-template-columns: 1fr 1fr;
-    margin: ${p => p.theme.spacing(2)}px;
+    margin: ${(p) => p.theme.spacing(2)}px;
   }
 
   @media (max-width: 500px) {
     grid-template-columns: 1fr;
-    margin: ${p => p.theme.spacing(2)}px;
+    margin: ${(p) => p.theme.spacing(2)}px;
   }
 
   & > div {
@@ -30,24 +43,24 @@ const Grid = styled("div")`
   }
 `;
 
-const Img = styled("img")`
+const Img = styled('img')`
   height: 180px;
-  margin-bottom: ${p => p.theme.spacing(4)}px;
+  margin-bottom: ${(p) => p.theme.spacing(4)}px;
 
   @media (max-width: 800px) {
     height: 100px;
-    margin-bottom: ${p => p.theme.spacing(2)}px;
+    margin-bottom: ${(p) => p.theme.spacing(2)}px;
   }
 `;
 
 const StyledCardContent = styled(CardContent)`
-  padding: ${p => p.theme.spacing(8)}px ${p => p.theme.spacing(4)}px
-    ${p => p.theme.spacing(12)}px ${p => p.theme.spacing(4)}px;
+  padding: ${(p) => p.theme.spacing(8)}px ${(p) => p.theme.spacing(4)}px
+    ${(p) => p.theme.spacing(12)}px ${(p) => p.theme.spacing(4)}px;
 `;
 
 const CategoryList: React.FC<{ categories: Category[] }> = ({ categories }) => (
   <Grid>
-    {categories.map(category => (
+    {categories.map((category) => (
       <Card key={category.slug}>
         <StyledCardContent>
           <Link to={category.url}>
