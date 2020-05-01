@@ -89,7 +89,7 @@ const RelatedArticlesWrapper = styled('div')`
 `;
 
 const RelatedArticles: React.FC<{ articles: MdxArticle[] }> = ({
-  articles,
+  articles
 }) => {
   return (
     <RelatedArticlesWrapper>
@@ -133,11 +133,9 @@ const Ul = styled('ul')`
 const Code = styled('code')`
   display: block;
   font-family: Consolas, Menlo, Courier, monospace;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
   padding: ${(p) => p.theme.spacing(4)}px;
   border-radius: ${(p) => p.theme.shape.borderRadius}px;
-  overflow-x: auto;
+  overflow-x: scroll;
 `;
 
 const P = styled(Typography)`
@@ -183,12 +181,12 @@ const mdxComponents = {
   h1: H1,
   h2: H2,
   h3: H3,
-  code: Code,
+  code: Code
 };
 
 export default function ({
   data,
-  pageContext,
+  pageContext
 }: {
   data: PageQueryData;
   pageContext: { basePath: string };
@@ -197,7 +195,7 @@ export default function ({
   const {
     mdx,
     site: { siteMetadata },
-    allMdx,
+    allMdx
   } = data;
   const { frontmatter, fields } = mdx;
   const { title, description } = frontmatter;
